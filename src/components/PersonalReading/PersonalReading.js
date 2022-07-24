@@ -14,7 +14,7 @@ function PersonalReading() {
     const [currentPageNumber, setCurrentPageNumber] = useState(2);
     
     useEffect(() => {
-        axios.get(`http://3.35.27.172:3000/1/${currentPageNumber}`)
+        axios.get(`http://127.0.0.1/1/${currentPageNumber}`)
         .then((response) => {
             setHtml(response.data.result.pageHtml);
         })

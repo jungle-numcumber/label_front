@@ -4,109 +4,52 @@ import { defaultValueCtx, Editor, rootCtx } from '@milkdown/core';
 import { listener, listenerCtx } from '@milkdown/plugin-listener';
 import { prism } from '@milkdown/plugin-prism';
 import { tooltip } from '@milkdown/plugin-tooltip';
-import { codeFence as cmCodeFence, commonmark, image, link } from '@milkdown/preset-commonmark';
+import { codeFence as cmCodeFence, commonmark, image, link, commonmarkNodes, commonmarkPlugins, blockquote, SupportedKeys  } from '@milkdown/preset-commonmark';
 import { Node } from '@milkdown/prose/model';
 import { ReactEditor, useEditor, useNodeCtx } from '@milkdown/react';
 import { nord } from '@milkdown/theme-nord';
 import { FC, ReactNode, useEffect } from 'react';
-
 import { CodeFence } from './CodeFence';
 import { codeFence } from './CodeFence/codeFence.node';
 import { Image } from './Image';
 import { block, blockPlugin } from '@milkdown/plugin-block';
-import React from 'react';
-
-import { collaborative, CollabService, collabServiceCtx } from '@milkdown/plugin-collaborative';
 import { math } from '@milkdown/plugin-math';
 import { gfm } from '@milkdown/preset-gfm';
-// import { nord } from '@milkdown/theme-nord';
-import { WebsocketProvider } from 'y-websocket';
-import { Doc } from 'yjs';
+import io from 'socket.io-client';
+import React from 'react'
 
-const markdown = `
-# Milkdown Collaborative Example
----
-Now you can play!
-`;
-
-const options = [
-    { color: '#5e81AC', name: 'milkdown user 1' },
-    { color: '#8FBCBB', name: 'milkdown user 2' },
-    { color: '#dbfdbf', name: 'milkdown user 3' },
-    { color: '#D08770', name: 'milkdown user 4' },
-];
-const rndInt = Math.floor(Math.random() * 4);
-
-const status$ = document.getElementById('status');
-const connect$ = document.getElementById('connect');
-const disconnect$ = document.getElementById('disconnect');
-
-const apply$ = document.getElementById('apply');
-const template$ = document.getElementById('template');
-
-const room$ = document.getElementById('room');
-const toggle$ = document.getElementById('toggle');
-
-const autoConnect = true;
-class CollabManager {
-    private room = 'milkdown';
-    private doc!: Doc;
-    private wsProvider!: WebsocketProvider;
-
-    constructor(private collabService: CollabService) {
-        if (room$) {
-            room$.textContent = this.room;
-        }
+let firstPage = '';
+const url: string = 'ws://localhost:3000';
+const socket = io(url, { transports: ["websocket"] });
+let timerId : NodeJS.Timeout
+export class WrapperMilkdown extends React.Component<{},{ fp: string, flag: boolean }> {
+    constructor(props: any) {
+        console.log('construct')
+        super(props);
+        this.state = {fp: '', flag: false};
+        socket.once('updateEditorOnce', (value) => {
+                this.setState({
+                    fp: value,
+                    flag: true
+                })
+        })
     }
+    render() {
+    console.log('value in render:', this.state.fp, this.state.flag)
+      return (
+        <div>
+            {this.state.flag && <Milkdown value = {this.state.fp}/>}
+        </div>
+        )
+    };
+  }
 
-    flush(template: string) {
-        this.doc?.destroy();
-        this.wsProvider?.destroy();
-
-        this.doc = new Doc();
-        this.wsProvider = new WebsocketProvider('ws://localhost:3000', this.room, this.doc, { connect: autoConnect });
-        this.wsProvider.awareness.setLocalStateField('user', options[rndInt]);
-        this.wsProvider.on('status', (payload: { status: string }) => {
-            if (status$) {
-                status$.innerText = payload.status;
-            }
-        });
-
-        this.collabService.bindDoc(this.doc).setAwareness(this.wsProvider.awareness);
-        this.wsProvider.once('synced', async (isSynced: boolean) => {
-            if (isSynced) {
-                this.collabService.applyTemplate(template).connect();
-            }
-        });
-    }
-
-    connect() {
-        this.wsProvider.connect();
-        this.collabService.connect();
-    }
-
-    disconnect() {
-        this.collabService.disconnect();
-        this.wsProvider.disconnect();
-    }
-
-    applyTemplate(template: string) {
-        this.collabService
-            .disconnect()
-            .applyTemplate(template, () => true)
-            .connect();
-    }
-
-    toggleRoom() {
-        this.room = this.room === 'milkdown' ? 'sandbox' : 'milkdown';
-        if (room$) {
-            room$.textContent = this.room;
-        }
-
-        const template = this.room === 'milkdown' ? markdown : '# Sandbox Room';
-        this.disconnect();
-        this.flush(template);
-    }
+/* solution 2 */
+function updateEditor(userID : string, pdfID : string, value : string) {
+    timerId = setTimeout(() => {
+        socket.emit("updateEditor", {id: userID, pdfId: pdfID, text: value});
+        alert("editor is updated.");
+    }, 500);
 }
 const Link: FC<{ children: ReactNode }> = ({ children }) => {
     const { node } = useNodeCtx();
@@ -118,75 +61,63 @@ const Link: FC<{ children: ReactNode }> = ({ children }) => {
 };
 
 export const Milkdown: FC<{ value: string }> = ({ value }) => {
+    console.log('in milk compo:', value)
     const { editor, loading, getInstance } = useEditor((root, renderReact) => {
         const nodes = commonmark
-            .configure(image, { view: renderReact(Image) })
-            .configure(link, { view: renderReact(Link) })
-            .replace(cmCodeFence, codeFence(renderReact<Node>(CodeFence, { as: 'section' }))());
-        const editor = Editor.make()
-            .config((ctx) => {
-                ctx.set(rootCtx, root);
-                ctx.set(defaultValueCtx, value);
-                ctx.get(listenerCtx).markdownUpdated((_, value) => {
-                    return value;
-                    // console.log(value);
-                });
-            }).use(block.configure(blockPlugin, {
-                configBuilder: (ctx) => {
-                    return [/* your actions */];
-                }
-            }))
-            .use(nord)
-            // .use(nodes)
-            .use(gfm)
-            .use(math)
-            .use(tooltip)
-            .use(prism)
-            .use(listener)
-            .use(collaborative)
-            // .create();
-        
-            return editor
-            
-    });
-    
-    useEffect(() => {
-        if (!loading) {
-            const instance = getInstance();
-            instance?.action((ctx) => {
-                const collabService = ctx.get(collabServiceCtx);
-                const collabManager = new CollabManager(collabService);
-                collabManager.flush(markdown);
-        
-                if (connect$) {
-                    connect$.onclick = () => {
-                        collabManager.connect();
-                    };
-                }
-        
-                if (disconnect$) {
-                    disconnect$.onclick = () => {
-                        collabManager.disconnect();
-                    };
-                }
-        
-                if (apply$ && template$) {
-                    apply$.onclick = () => {
-                        if (template$ instanceof HTMLTextAreaElement) {
-                            collabManager.applyTemplate(template$.value);
+                    .configure(image, { view: renderReact(Image) })
+                    .configure(link, { view: renderReact(Link) })
+                    .replace(cmCodeFence, codeFence(renderReact<Node>(CodeFence, { as: 'section' }))());
+                const node2 = commonmarkNodes.configure(blockquote, {
+                    keymap: {
+                        [SupportedKeys.Blockquote]: 'Mod-Shift-b',
+                        // or you may want to bind multiple keys:
+                        [SupportedKeys.Blockquote]: ['Mod-Shift-b', 'Mod-b'],
+                    },
+                }); 
+                const editor = Editor.make()
+                    .config((ctx) => {
+                        console.log('defaultValueCtx:', 'hey');
+                        ctx.set(rootCtx, root);
+                        ctx.set(defaultValueCtx, value);
+                        ctx.get(listenerCtx).markdownUpdated((_, value) => {
+                            const userID = 'ddong';
+                            const pdfID = 'pdf';
+                            console.log('input value:', value)
+                            /* solution 2 */
+                            if (timerId) {
+                                clearTimeout(timerId);
+                                updateEditor(userID, pdfID, value)
+                                console.log('clear')
+                            } else {
+                                updateEditor(userID, pdfID, value)
+                                console.log('update')
+                            }
+                            /* solution 1 */
+                            // socket.emit("updateEditor", {id: userID, pdfId: pdfID, text: value});
+                            socket.on('connect_error', err => console.log(err))
+                            socket.on('connect_failed', err => console.log(err))
+                            socket.on('disconnect', err => console.log(err))
+                            return value;
+                        });
+                    })
+                    .use(block.configure(blockPlugin, {
+                        configBuilder: (ctx) => {
+                            return [/* your actions */];
                         }
-                    };
-                }
-        
-                if (toggle$) {
-                    toggle$.onclick = () => {
-                        collabManager.toggleRoom();
-                    };
-                }
-                // do something
-            });
-        }
-    }, [getInstance, loading]);
+                    }))
+                    .use(nord)
+                    // .use(node2)
+                    // .use(commonmarkPlugins)
+                    .use(gfm)
+                    .use(math)
+                    .use(tooltip)
+                    .use(prism)
+                    .use(listener)
 
-    return <ReactEditor editor={editor} />;
+                    return editor
+        })
+        useEffect(() => {
+        }, [value]);
+    
+    return <ReactEditor editor={editor} />
 };

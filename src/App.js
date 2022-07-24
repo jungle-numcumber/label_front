@@ -7,7 +7,7 @@ import Highlight from './components/Highlight/Highlight';
 import Library from './components/Library/Library.js';
 import Test from './components/Test/Test.js'
 import PersonalReading from './components/PersonalReading/PersonalReading.js';
-import { Milkdown } from './components/CoEditorMilk/CoEditorMilk';
+import { Milkdown, WrapperMilkdown } from './components/CoEditorMilk/CoEditorMilk';
 // import EditBook from './components/EditBook/EditBook.js'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import React, { StrictMode } from 'react';
@@ -26,7 +26,7 @@ milkdown.create();
 Now you can play!
 `;
     function Test(props){
-        return <Milkdown value={markdown}/>
+        return <WrapperMilkdown/>
     }
   	return (
 		<div className="App">
@@ -44,9 +44,7 @@ Now you can play!
 				<Route path='/highlight/*' element={<Highlight />}></Route>
 				{/* <Route path='/coeditor' element={<Y />}></Route> */}
                 <Route path='/milkdown' element={
-                <StrictMode>
                     <Test/>
-                </StrictMode>
                 }></Route>
 				{/* <Route path='/editbook/*' element={<EditBook/>}></Route> */}
 			</Routes>
