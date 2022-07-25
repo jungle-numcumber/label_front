@@ -20,18 +20,26 @@ import React from 'react'
 
 let firstPage = '';
 const url: string = 'ws://localhost:3000';
-const socket = io(url, { transports: ["websocket"] });
+const socket = io(url, { 
+    transports: ["websocket"],
+    query: {
+        "userId": "ddong",
+        "pdfId": "pdf"
+    }
+});
 let timerId : NodeJS.Timeout
 export class WrapperMilkdown extends React.Component<{},{ fp: string, flag: boolean }> {
     constructor(props: any) {
         console.log('construct')
         super(props);
         this.state = {fp: '', flag: false};
-        socket.once('updateEditorOnce', (value) => {
+        socket.on('connect',() => {
+            socket.once('updateEditorOnce', (value) => {
                 this.setState({
                     fp: value,
                     flag: true
                 })
+            })
         })
     }
     render() {
@@ -49,7 +57,7 @@ function updateEditor(userID : string, pdfID : string, value : string) {
     timerId = setTimeout(() => {
         socket.emit("updateEditor", {id: userID, pdfId: pdfID, text: value});
         alert("editor is updated.");
-    }, 500);
+    }, 700);
 }
 const Link: FC<{ children: ReactNode }> = ({ children }) => {
     const { node } = useNodeCtx();
@@ -94,9 +102,6 @@ export const Milkdown: FC<{ value: string }> = ({ value }) => {
                             }
                             /* solution 1 */
                             // socket.emit("updateEditor", {id: userID, pdfId: pdfID, text: value});
-                            socket.on('connect_error', err => console.log(err))
-                            socket.on('connect_failed', err => console.log(err))
-                            socket.on('disconnect', err => console.log(err))
                             return value;
                         });
                     })
