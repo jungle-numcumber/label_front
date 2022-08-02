@@ -7,7 +7,7 @@ import Highlight from './components/Highlight/Highlight';
 import Library from './components/Library/Library.js';
 import Test from './components/Test/Test.js'
 import PersonalReading from './components/PersonalReading/PersonalReading.js';
-import { Milkdown, WrapperMilkdown } from './components/CoEditorMilk/CoEditorMilk';
+import { MilkdownEditor, WrapperMilkdown } from './components/CoEditorMilk/CoEditorMilk';
 // import EditBook from './components/EditBook/EditBook.js'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import React, { StrictMode } from 'react';

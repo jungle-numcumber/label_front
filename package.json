@@ -10,15 +10,19 @@
     "@milkdown/core": "^6.3.0",
     "@milkdown/plugin-block": "^6.3.0",
     "@milkdown/plugin-collaborative": "^6.3.0",
+    "@milkdown/plugin-history": "^6.3.1",
     "@milkdown/plugin-listener": "^6.3.0",
     "@milkdown/plugin-math": "^6.3.0",
+    "@milkdown/plugin-menu": "^6.3.1",
     "@milkdown/plugin-prism": "^6.3.0",
     "@milkdown/plugin-tooltip": "^6.3.0",
+    "@milkdown/plugin-upload": "^6.3.1",
     "@milkdown/preset-commonmark": "^6.3.0",
     "@milkdown/preset-gfm": "^6.3.0",
     "@milkdown/prose": "^6.3.0",
     "@milkdown/react": "^6.3.0",
     "@milkdown/theme-nord": "^6.3.0",
+    "@milkdown/utils": "^6.3.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -38,6 +42,7 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
+    "fs": "^0.0.1-security",
     "install": "^0.13.0",
     "npm": "^8.14.0",
     "react": "^18.2.0",
@@ -56,7 +61,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
- 
   "browserslist": {
     "production": [
       ">0.2%",
