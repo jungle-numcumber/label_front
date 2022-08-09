@@ -20,7 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight, faFilePdf, faLock } from '@fortawesome/free-solid-svg-icons';
 
 // mui
-import { CircularProgress, requirePropFactory } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 
 function PersonalReading(props) {
     const location = useLocation();
@@ -65,7 +65,6 @@ function PersonalReading(props) {
     }, [pdfIdx])
 
     useEffect(() => {
-        // if (commitIdx === -1) {
         if (readOnly === -1) {
             const getPageLink = async () => {
                 const pageLink = await axios.get(`https://inkyuoh.shop/pdfs/${pdfIdx}/pages/${currentPageNumber}`).then((response) => {
@@ -83,23 +82,6 @@ function PersonalReading(props) {
             
             getPageLink();
         }
-        // } else {
-        //     const getPageLink = async () => {
-        //         const pageLink = await axios.get(`https://inkyuoh.shop/pdfs/${pdfIdx}/pages/${currentPageNumber}`).then((response) => {
-        //             return response.data.result.pageLink;
-        //         });
-                
-        //         const getHtml = await axios.get(`${pageLink}`).then((response) => {
-        //             setHtml(response.data);
-        //         });
-                
-        //         const getHighlightData = await axios.get(`https://inkyuoh.shop/highlights/pages/${currentPageNumber}/commitIdx/${commitIdx}`).then((response) => {
-        //             setHighlightData(response.data.result);
-        //         })
-        //     }
-
-        //     getPageLink();
-        // }
         
         if (readOnly === 1) {
             const getPageLink = async () => {
