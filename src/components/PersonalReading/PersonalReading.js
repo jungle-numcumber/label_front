@@ -40,6 +40,7 @@ function PersonalReading(props) {
     const highlightButtonYellow = useRef();
     const highlightListRef = useRef();
     const textEditorRef = useRef();
+    const toPdfButton = useRef();
     
     // 수정 필요, props로 받아야 할 듯.
     // library에서 넘어올 때 currentPageNumber를 유저로부터 가져와야 함.
@@ -56,7 +57,7 @@ function PersonalReading(props) {
         axios.get(`https://inkyuoh.shop/users/${userIdx}/pdfs`)
             .then((response) => {
                 console.log('TotalPage GET response:', response);
-                let newCurrentBookInfo = response.data.result.find(x => x.pdfIdx === pdfIdx);
+            let newCurrentBookInfo = response.data.result.find(x => x.pdfIdx === pdfIdx);
                 setCurrentBookInfo(newCurrentBookInfo);
             })
             .catch((error) => {
@@ -199,9 +200,13 @@ function PersonalReading(props) {
         if (readOnly === 1) {
             highlightListRef.current.style.opacity = 0.85;
             textEditorRef.current.style.opacity = 0.7;
+            
+            toPdfButton.current.setAttribute('style', 'pointer-events: none');
         } else {
             highlightListRef.current.style.opacity = 1;
             textEditorRef.current.style.opacity = 1;
+            
+            toPdfButton.current.setAttribute('style', 'pointer-events: default');
         }
     }, [readOnly])
 
@@ -272,14 +277,16 @@ function PersonalReading(props) {
                             <h1>{currentBookInfo.pdfName}</h1>
                             <p>{currentBookInfo.author}</p>
                         </div>
-                        <FontAwesomeIcon className="ToPdfButton" icon={faFilePdf} onClick={() => {
-                            setLoading(true); 
-                            setTimeout(() => {
-                                toPdf(currentBookInfo.pdfName, loading, setLoading);
+                        <FontAwesomeIcon ref={toPdfButton} className="ToPdfButton" icon={faFilePdf} onClick={() => {
+                            if (readOnly === -1) {
+                                setLoading(true); 
                                 setTimeout(() => {
-                                    setLoading(false);
-                                }, 500);
-                            }, 100);
+                                    toPdf(currentBookInfo.pdfName, loading, setLoading);
+                                    setTimeout(() => {
+                                        setLoading(false);
+                                    }, 500);
+                                }, 100);
+                            }
                         }}></FontAwesomeIcon>
                     </div>
                     <WrapperTextEditor readOnly={readOnly} markdownValue={markdownValue} commitIdx={commitIdx} userIdx={String(userIdx)} pdfIdx={String(pdfIdx)}></WrapperTextEditor>
