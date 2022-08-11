@@ -15,9 +15,7 @@ import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 function HighlightList(props) {
     const [highlightData, setHighlightData] = useState([]);
-    // console.log(props);
     useEffect(() => {
-        // if (props.commitIdx === -1) {
         if (props.readOnly === -1) {
             async function getHighlightData() {
                 await axios.get(`https://inkyuoh.shop/highlights/pdfs/${props.pdfIdx}/pages/${props.currentPageNumber}`)
@@ -28,8 +26,6 @@ function HighlightList(props) {
             
             getHighlightData(); 
         }
-            
-        // }
         
         if (props.readOnly === 1) {
             async function getHighlightData() {
@@ -41,17 +37,6 @@ function HighlightList(props) {
             
             getHighlightData();
         }
-        
-        // else {
-        //     async function getHighlightData() {
-        //         await axios.get(`https://inkyuoh.shop/highlights/pages/${props.currentPageNumber}/commitIdx/${props.commitIdx}`)
-        //             .then((response) => {
-        //                 setHighlightData(response.data.result);
-        //             })
-        //     }
-            
-        //     getHighlightData();
-        // }
     }, [props.currentPageNumber, props.updateHighlightList, props.commitIdx, props.forceUpdate]);
 
     return (
@@ -99,8 +84,6 @@ function HighlightCards(props) {
     }
 
     async function deleteHighlight(commitIdx, highlightIdx, setHighlightData, updateHighlightList, setUpdateHighlightList, currentPageNumber) {
-        
-        // if (commitIdx === -1) {
         await axios.delete(`https://inkyuoh.shop/highlights/${highlightIdx}`)
             .then((response) => {
                 console.log("highlight delete response:", response);
@@ -130,7 +113,6 @@ function HighlightCards(props) {
                         }
                     })
             })
-        // }
     }
 
     return (
