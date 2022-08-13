@@ -11,18 +11,20 @@ import { math } from '@milkdown/plugin-math';
 import { menu, menuPlugin } from '@milkdown/plugin-menu';
 import { gfm } from '@milkdown/preset-gfm';
 import { history } from '@milkdown/plugin-history'
-import io from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 import React from 'react';
 import './TextEditor.css';
 import axios from "axios";
 
 const url:string = 'https://tradingstudy.shop:443';
 let socket:any;
-
 let timerId:NodeJS.Timeout
+
 export class WrapperTextEditor extends React.Component<{readOnly:number, markdownValue: JSONRecord, commitIdx: number, userIdx: string, pdfIdx: string}, { fp: any, flag: boolean }> {
     constructor(props: any) {
         super(props);
+        
+        // socket 정의
         socket = io(url, {
             transports: ["websocket"],
             query: {
@@ -31,7 +33,10 @@ export class WrapperTextEditor extends React.Component<{readOnly:number, markdow
             },
         });
         
+        // state 정의
         this.state = {fp: {}, flag: false};
+        
+        // socket 통신 on
         socket.on('connect',() => {
             socket.once('updateEditorOnce', (value: any) => {
                 this.setState({
@@ -40,10 +45,6 @@ export class WrapperTextEditor extends React.Component<{readOnly:number, markdow
                 })
             })
         })
-        
-        // if (this.props.commitIdx !== -1) {
-        //     socket.disconnect();
-        // }
     }
 
     render() {
@@ -121,8 +122,6 @@ async function uploadImageToS3(preSignedUrl : any, imageFile : any) {
 }
 
 export const TextEditor: FC<{ readOnly: number, value: JSONRecord, markdownValue: JSONRecord, commitIdx: number, userIdx: string, pdfIdx: string }> = ({ readOnly, value, markdownValue, commitIdx, userIdx, pdfIdx }) => {
-    // let readonly = false;
-    // const editable = () => !readonly;
     const nullable:null = null;
     const { editor, loading, getInstance } = useEditor((root, renderReact) => {
                 
@@ -220,10 +219,6 @@ export const TextEditor: FC<{ readOnly: number, value: JSONRecord, markdownValue
         
         if (readOnly === 1) {            
             document.querySelector('.ProseMirror.editor')?.setAttribute('contenteditable', 'false');
-            // document.querySelectorAll('.editor > *')?.forEach((element) => {
-            //     console.log(element);
-            //     element.setAttribute('style', 'cursor: default !important');
-            // })
         }
         
         document.querySelector('.editor')?.setAttribute('style', 'overflow: scroll !important');
