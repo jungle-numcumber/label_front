@@ -108,7 +108,8 @@ function PersonalReading(props) {
         setHtml({...html})
         
         if (commitIdx !== -1) {
-            axios.post('https://inkyuoh.shop/commits/books/2/2', {
+            const getMarkdownValue = async () => {
+                axios.post('https://inkyuoh.shop/commits/books/2/2', {
                     commitIdx: commitIdx
                 })
                 .then((response) => {
@@ -118,6 +119,9 @@ function PersonalReading(props) {
                     console.log('Text Editor markdownValue response:', response);
                     setMarkdownValue(response);
                 })
+            }
+            
+            getMarkdownValue();
         }
     }, [commitIdx, forceUpdate])
     
