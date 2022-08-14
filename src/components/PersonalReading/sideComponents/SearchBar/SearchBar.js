@@ -9,6 +9,7 @@ function SearchBar(props) {
         event.preventDefault();
     }
     
+    let timer;
     function handleSearchChange(event) {
         if (event.target.value === '') {
             async function getInitialHighlightData() {
@@ -24,7 +25,13 @@ function SearchBar(props) {
     
             getInitialHighlightData();
         } else {
-            async function getHighlightData() {
+            // debounce 기법 적용, 비효율적인 API 요청을 줄일 수 있다.
+            if (timer) {
+                clearTimeout(timer);
+            }
+            
+            timer = setTimeout(async () => {
+                console.log('hi');
                 await axios.get(`https://inkyuoh.shop/pdfs/${props.pdfIdx}/highlights/search?keyword=${event.target.value}`)
                     .then((response) => {
                         console.log('Search highlight data response:', response);
@@ -33,9 +40,7 @@ function SearchBar(props) {
                     .catch((error) => {
                         console.log('Search highlight data Fail, error:', error);
                     })
-            }
-            
-            getHighlightData();
+            }, 250); 
         }
     }
     
