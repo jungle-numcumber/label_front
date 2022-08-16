@@ -31,7 +31,6 @@ function SearchBar(props) {
             }
             
             timer = setTimeout(async () => {
-                console.log('hi');
                 await axios.get(`https://inkyuoh.shop/pdfs/${props.pdfIdx}/highlights/search?keyword=${event.target.value}`)
                     .then((response) => {
                         console.log('Search highlight data response:', response);
