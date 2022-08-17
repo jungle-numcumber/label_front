@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './SideBar.module.css'
 import { faAngleRight, faAngleLeft, faEye, faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
+import RollBackCheckPopUp from './RollBackCheckPopUp/RollBackCheckPopUp';
+
 
 // mui
 import Stack from '@mui/material/Stack';
