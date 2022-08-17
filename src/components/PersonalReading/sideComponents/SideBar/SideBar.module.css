@@ -170,3 +170,35 @@
     /* -webkit-box-shadow: 7px 3px 9px 3px rgba(0,0,0,0.5);  */
     box-shadow: 12px 3px 6px 1px rgba(0,0,0,0.5);
 }
+
+.wrapForTooltipReadOnly, .wrapForTooltipRollBack {
+    position: relative;
+    
+    display: inline-block;
+}
+
+.tooltipReadOnly, .tooltipRollBack {
+    position: absolute;
+    background-color: #FFFFFF;
+    color: black;
+    border: 1px solid #E2E5E6;
+    border-radius: 4px;
+    width: auto;
+    min-width: 56px;
+    max-width: 96px;
+    bottom: 135%;
+    right: -30%;
+    text-align: center;
+    font-weight: bold;
+
+    display: none;
+}
+
+.wrapForTooltipReadOnly:hover .tooltipReadOnly {
+    display: block;
+}
+
+.wrapForTooltipRollBack:hover .tooltipRollBack {
+    display: block;
+}
+

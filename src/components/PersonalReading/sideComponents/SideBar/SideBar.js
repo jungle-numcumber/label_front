@@ -160,12 +160,20 @@ function History(props) {
 								}}>{element.createdAt.substring(2)}</p>
 								
 								<div className={styles.historyIcon}>
-									<FontAwesomeIcon className={styles.readOnly} icon={faEye} onClick={() => {
-										goToReadOnly(element);
-									}}></FontAwesomeIcon>
-									<FontAwesomeIcon className={styles.rollBack} style={{ marginLeft: '4px'}} icon={faArrowRotateLeft} onClick={() => {
-										rollback(element);
-									}}></FontAwesomeIcon>
+								
+									<div className={styles.wrapForTooltipReadOnly}>
+										<div className={styles.tooltipReadOnly}>미리보기</div>		
+										<FontAwesomeIcon className={styles.readOnly} icon={faEye} onClick={() => {
+											goToReadOnly(element);
+										}}></FontAwesomeIcon>
+									</div>
+									
+									<div className={styles.wrapForTooltipRollBack}>
+										<div className={styles.tooltipRollBack}>되돌아가기</div>
+										<FontAwesomeIcon className={styles.rollBack} style={{ marginLeft: '4px'}} icon={faArrowRotateLeft} onClick={() => {
+											rollback(element);
+										}}></FontAwesomeIcon>
+									</div>
 								</div>
 							</div>
 						</li>
