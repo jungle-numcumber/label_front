@@ -80,7 +80,12 @@ function HighlightList(props) {
 
 function HighlightCards(props) {
     function dragStart_handler(event) {
+        console.log(event.target);
         event.dataTransfer.setData("text/plain", event.target.innerHTML);
+    }
+    
+    function dragEnd_handler(event) {
+        console.log(event.target);
     }
 
     async function deleteHighlight(commitIdx, highlightIdx, setHighlightData, updateHighlightList, setUpdateHighlightList, currentPageNumber) {
@@ -114,13 +119,13 @@ function HighlightCards(props) {
                     })
             })
     }
-
+    
     return (
         <>
             {props.highlightData?.map(function (element, index) {
                 return (
                     <>
-                        <Card sx={{ width: '100%', minWidth: 275, marginBottom: 1 }} key={index} className={styles.card}>
+                        <Card sx={{ width: '100%', minWidth: 275, marginBottom: 1 }} key={element.highlightIdx} className={styles.card}>
                             <CardHeader 
                                 sx={{ paddingBottom: 0 }}
                                 avatar={<Avatar sx={{ width: 10, height: 10, bgcolor: element.color === 0 ? '#93E7A2' : element.color === 1 ? '#9747FF' : element.color === 2 ? '#FFD644' : null}} 
@@ -132,8 +137,8 @@ function HighlightCards(props) {
                                     </IconButton>
                                     : null
                                 }
-                            /><CardContent sx={{ paddingTop: '4px'}}>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" draggable={props.readOnly === -1 ? 'true' : null} onDragStart={(event) => { dragStart_handler(event); }}>
+                            /><CardContent sx={{ paddingTop: '4px' }}>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" draggable={props.readOnly === -1 ? 'true' : null} onDragStart={(event) => { dragStart_handler(event); }} onDragEnd={(event) => { dragEnd_handler(event); }}>
                                     {element.data}
                                 </Typography>
                             </CardContent>
