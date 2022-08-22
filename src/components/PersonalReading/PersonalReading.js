@@ -21,7 +21,15 @@ import { CircularProgress } from "@mui/material";
 
 function PersonalReading(props) {
     const location = useLocation();
-    const { pdfIdx, recentlyReadPage } = location.state;
+    // 주소창에 직접 URL 입력해서 들어오는 경우를 위해
+    // 일단 '유지보수하기 어렵게 코딩하는 방법' 책의 첫 페이지를 default로 설정해둠.
+    let pdfIdx= 17;
+    let recentlyReadPage = 1;
+    if (location.state !== null) {
+        pdfIdx = location.state.pdfIdx;
+        recentlyReadPage = location.state.recentlyReadPage;
+    }
+    
     const [html, setHtml] = useState('');
     const [updateHighlightList, setUpdateHighlightList] = useState(true);
     const [commitIdx, setCommitIdx] = useState(-1);
