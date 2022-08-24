@@ -173,7 +173,9 @@ function History(props) {
 									<div className={styles.wrapForTooltipRollBack}>
 										<div className={styles.tooltipRollBack}>되돌아가기</div>
 										<FontAwesomeIcon className={styles.rollBack} style={{ marginLeft: '4px'}} icon={faArrowRotateLeft} onClick={() => {
-											rollback(element);
+											if (window.confirm('해당 기록으로 되돌아가시겠습니까?\n현재 작업 내용으로도 돌아오길 원하신다면 저장을 먼저 해주세요.') === true) {
+												rollback(element);	
+											}
 										}}></FontAwesomeIcon>
 									</div>
 								</div>
