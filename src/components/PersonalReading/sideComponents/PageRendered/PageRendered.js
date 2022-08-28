@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./PageRendered.css";
 
 function PageRendered(props) {
