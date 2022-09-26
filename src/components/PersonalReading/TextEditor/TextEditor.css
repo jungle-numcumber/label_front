@@ -1,0 +1,93 @@
+.milkdown-menu-wrapper {
+  height: 100% !important;
+}
+
+.milkdown-menu {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.milkdown {
+  box-shadow: none !important;
+  background-color: inherit !important;
+  background: inherit !important;
+  border: none !important;
+}
+
+.editor {
+  border: none !important;
+  background: inherit !important;
+  background-color: inherit !important;
+  overflow: scroll !important;
+  height: 100% !important;
+  padding-top: 20px !important;
+  padding-bottom: 0 !important;
+}
+
+.editor > * {
+  color: black;
+}
+
+.paragraph {
+  margin: 2px 0 !important;
+  cursor: text;
+}
+
+.milkdown-1e1shhb {
+  margin: 0 !important;
+}
+
+.milkdown-1xp8x74 {
+  margin: 6px 8px !important;
+  width: 0 !important;
+}
+
+.milkdownMenuWrapperParent {
+  height: 85% !important;
+}
+
+.menu-selector {
+  margin: 0px !important;
+
+  display: none !important;
+}
+
+button[title='redo'] {
+  display: none;
+}
+
+button[title='undo'] {
+  display: none;
+}
+
+button[title='select'] {
+  display: none;
+}
+
+button[title='code'] {
+  display: none;
+}
+
+button[title='image'] {
+  display: none;
+}
+
+button[title='table'] {
+  display: none;
+}
+
+.milkdown-1xp8x74 {
+  display: none;
+}
+
+.heading.h1 {
+  height: 48px !important;
+}
+
+.heading.h2 {
+  height: 40px !important;
+}
+
+.heading {
+  margin: 16px 0 !important;
+}

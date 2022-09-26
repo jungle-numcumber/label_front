@@ -2,15 +2,13 @@ import './PersonalReading.css';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-
-// sideComponents
-import { WrapperTextEditor } from './sideComponents/TextEditor/TextEditor.tsx';
-import PageRendered from './sideComponents/PageRendered/PageRendered.js';
-import HighlightList from './sideComponents/HighlightList/HighlightList.js';
-import SideBar from './sideComponents/SideBar/SideBar.js';
+import { WrapperTextEditor } from './TextEditor/TextEditor.tsx';
+import PageRendered from './PageRendered/PageRendered.js';
+import HighlightList from './HighlightList/HighlightList.js';
+import SideBar from './SideBar/SideBar.js';
 
 // sideFunction for highlighting
-import { clickHighlight, doHighlight, turnOver, toPdf } from './sideFunction/sideFunction';
+import { clickHighlight, doHighlight, turnOver, toPdf } from '../../util/highlight';
 
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -62,13 +60,10 @@ function PersonalReading(props) {
     axios
       .get(`https://inkyuoh.shop/users/${userIdx}/pdfs`)
       .then(response => {
-        console.log('TotalPage GET response:', response);
         let newCurrentBookInfo = response.data.result.find(x => x.pdfIdx === pdfIdx);
         setCurrentBookInfo(newCurrentBookInfo);
       })
-      .catch(error => {
-        console.log('TotalPage GET Fail, error:', error);
-      });
+      .catch(error => {});
   }, [pdfIdx]);
 
   useEffect(() => {
@@ -131,7 +126,6 @@ function PersonalReading(props) {
             return JSON.parse(response.data.result[0].editorLog);
           })
           .then(response => {
-            console.log('Text Editor markdownValue response:', response);
             setMarkdownValue(response);
           });
       };
@@ -146,9 +140,7 @@ function PersonalReading(props) {
       for (let i = 0; i < highlightData.length; i++) {
         doHighlight(highlightData[i], highlightData[i].highlightIdx);
       }
-    } catch {
-      // console.log('hello');
-    }
+    } catch {}
   }, [highlightData, commitIdx, forceUpdate, readOnly]);
 
   useEffect(() => {
@@ -211,7 +203,7 @@ function PersonalReading(props) {
       document.removeEventListener('mousedown', documentMouseDown);
       document.removeEventListener('touchstart', documentMouseDown);
     };
-  }, [html]);
+  }, [html, props.mode]);
 
   useEffect(() => {
     if (readOnly === 1) {

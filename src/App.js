@@ -1,14 +1,14 @@
 import './App.css';
-import Nav from './component/Nav/Nav';
-import Login from './component/Login/Login';
-import Signup from './component/SignUp/SignUp.js';
+import Nav from './components/Nav/Nav';
+import Login from './components/Login/Login';
+import Signup from './components/SignUp/SignUp.js';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { lazy, Suspense, useState } from 'react';
 
-const Userpage = lazy(() => import('./component/User/User.js'));
-const Library = lazy(() => import('./component/Library/Library.js'));
+const Userpage = lazy(() => import('./components/User/User.js'));
+const Library = lazy(() => import('./components/Library/Library.js'));
 const PersonalReading = lazy(() => import('./components/PersonalReading/PersonalReading.js'));
-const Footer = lazy(() => import('./component/Footer/Footer.js'));
+const Footer = lazy(() => import('./components/Footer/Footer.js'));
 
 export default function App() {
   const location = useLocation();
