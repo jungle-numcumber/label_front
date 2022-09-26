@@ -1,147 +1,147 @@
 .wrap {
-    width: 100%;
-    height: 85%;
+  width: 100%;
+  height: 85%;
 }
 
 .container {
-    width: 100%;
-    height: 100%;
-    
-    overflow: scroll;
+  width: 100%;
+  height: 100%;
+
+  overflow: scroll;
 }
 
 .container::-webkit-scrollbar {
-    width: 6px;
-    background-color: transparent;
+  width: 6px;
+  background-color: transparent;
 }
 
 .container::-webkit-scrollbar-thumb {
-    width: 6px;
-    background-color: rgba(129, 161, 193, 0.38);
-    border-radius: 16px;
+  width: 6px;
+  background-color: rgba(129, 161, 193, 0.38);
+  border-radius: 16px;
 }
 
 .title {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
-    color: #1A202C;
-    
-    display: flex;
-    align-items: center;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #1a202c;
+
+  display: flex;
+  align-items: center;
 }
 
 .pageNumberInfo {
-    z-index: 11;
-    border: 1px solid #E2E5E6;
-    border-radius: 8px;
-    width: 64px;
-    height: 24px;
-    background-color: #FFFFFF;
-    font-weight: 700;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  z-index: 11;
+  border: 1px solid #e2e5e6;
+  border-radius: 8px;
+  width: 64px;
+  height: 24px;
+  background-color: #ffffff;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pageNumberInput {
-    all: unset;
-    border: none;
-    border-bottom: 1px solid #9ca4a7;
-    width: 20px;
-    color: var(--color-1-b);
-    cursor: text;
+  all: unset;
+  border: none;
+  border-bottom: 1px solid #9ca4a7;
+  width: 20px;
+  color: var(--color-1-b);
+  cursor: text;
 }
 
 .pageNumberInput::placeholder {
-    text-align: end;
-    color: var(--color-1-b);
+  text-align: end;
+  color: var(--color-1-b);
 }
 
 .highlightInfo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .pageNumber {
-    width: 100%;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    
-    display: flex;
-    align-items: center;
-    color: #1A202C;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+  color: #1a202c;
 }
 
 .highlightCard {
-    display: flex;
-    margin: 8px 0;
-    max-width: 100%;
-    max-height: 42px;
+  display: flex;
+  margin: 8px 0;
+  max-width: 100%;
+  max-height: 42px;
 }
 
 .highlightColor {
-    border: 1px solid var(--color-2-c);
-    background-color: var(--color-2-c);
-    border-radius: 100%;
-    width: 8px;
-    height: 8px;
-    margin-top: 6px;
-    margin-right: 8px;
-    
-    align-self: flex-start;
+  border: 1px solid var(--color-2-c);
+  background-color: var(--color-2-c);
+  border-radius: 100%;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  margin-right: 8px;
+
+  align-self: flex-start;
 }
 
 .highlightedText {
-    width: 100%;
+  width: 100%;
 
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    color: #2D3748;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #2d3748;
 }
 
 .clearHighlight {
-    margin-top: 6px;
-    
-    align-self: flex-start;
+  margin-top: 6px;
+
+  align-self: flex-start;
 }
 
 .highlightCardWrap {
-    border: 1px solid #E2E5E6;
-    height: 10%;
-    overflow: hidden;
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  border: 1px solid #e2e5e6;
+  height: 10%;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .highlightCardTitle {
-    display: flex;
+  display: flex;
 }
 
 .card {
-    transition-duration: 0.6s;
-    transition-property: transform;
+  transition-duration: 0.6s;
+  transition-property: transform;
 }
 
 .card:hover {
-    animation-name: hover;
-    animation-duration: 0.8s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  animation-name: hover;
+  animation-duration: 0.8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 @keyframes hover {
-    50% {
-      transform: translateY(-4px);
-    }
-  
-    100% {
-      transform: translateY(-6px);
-    }
+  50% {
+    transform: translateY(-4px);
   }
+
+  100% {
+    transform: translateY(-6px);
+  }
+}

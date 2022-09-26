@@ -1,27 +1,27 @@
 :root {
-	/* Color - Label_color_concept_1 */
-	--color-1-a: #DDDDDD;
-	--color-1-b: #393E46;
-	--color-1-c: #222931;
-	--color-1-d: #4DABB3;
-	
-	/* Color - Label_color_concept_2 */
-	--color-2-a: #5E5E5E;
-	--color-2-b: #FEECA0;
-	--color-2-c: #93E8DE;
-	
-	/* Color - Others */
-	--color-white: white;
-	--color-darkWhite: rgba(61, 59, 59, 0.247);
-    --color-lightGrey: #F7F7F7;
-    --color-userpage-block: #E1E1E1;
+  /* Color - Label_color_concept_1 */
+  --color-1-a: #dddddd;
+  --color-1-b: #393e46;
+  --color-1-c: #222931;
+  --color-1-d: #4dabb3;
 
-    /* button effect */
-    --box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
-    --position: relative;
-    --top:2px;
-	
-	/* Border Radius */
-	--border-radius: 4px;
-    --border-radius-2: 8px;
+  /* Color - Label_color_concept_2 */
+  --color-2-a: #5e5e5e;
+  --color-2-b: #feeca0;
+  --color-2-c: #93e8de;
+
+  /* Color - Others */
+  --color-white: white;
+  --color-darkWhite: rgba(61, 59, 59, 0.247);
+  --color-lightGrey: #f7f7f7;
+  --color-userpage-block: #e1e1e1;
+
+  /* button effect */
+  --box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+  --position: relative;
+  --top: 2px;
+
+  /* Border Radius */
+  --border-radius: 4px;
+  --border-radius-2: 8px;
 }

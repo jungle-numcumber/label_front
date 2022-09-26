@@ -1,11 +1,11 @@
-import './Loading.css'
+import './Loading.css';
 
 export default function Loading() {
-    return (
-      <div className='loading__background'>
-        <img src={process.env.PUBLIC_URL + '/images/book.gif'}/>
-      </div>
-    )
+  return (
+    <div className="loading__background">
+      <img src={process.env.PUBLIC_URL + '/images/book.gif'} />
+    </div>
+  );
 }
 
 /*
