@@ -80,9 +80,6 @@ function NavReading(props) {
         ></img>
       </div>
       <nav className={styles.navRead}>
-        {/* <label className={styles.labelRead}>Upload
-                    <input style={{display:'none'}} type='file'/>
-                </label> */}
         <UserImg></UserImg>
         <img
           className={styles.switch}

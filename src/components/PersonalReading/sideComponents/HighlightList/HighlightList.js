@@ -67,10 +67,6 @@ function HighlightList(props) {
         highlightData={highlightData}
         setHighlightData={setHighlightData}
       ></SearchBar>
-      <div className={styles.highlightInfo}>
-        {/* <p className={styles.pageNumber}>Page {props.currentPageNumber} / {props.totalPage}</p> */}
-        {/* <HighlightBadge></HighlightBadge> */}
-      </div>
       <aside className={styles.wrap}>
         <div className={styles.container}>
           <HighlightCards

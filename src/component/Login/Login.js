@@ -51,10 +51,6 @@ export default function Login(props) {
             <p className={styles.p}>Password</p>
             <input ref={password} className={styles.input} type="password" />
           </label>
-          {/* <label>
-                        <p className={styles.p}>Name</p>
-                        <input className={styles.input} type='text'/>
-                    </label> */}
           <button
             className={styles.buttonLogin}
             onClick={event => {
