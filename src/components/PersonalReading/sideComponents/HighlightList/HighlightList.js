@@ -124,7 +124,7 @@ function HighlightCards(props) {
         <>
             {props.highlightData?.map(function (element, index) {
                 return (
-                    <>
+                    
                         <Card sx={{ width: '100%', minWidth: 275, marginBottom: 1 }} key={element.highlightIdx} className={styles.card}>
                             <CardHeader 
                                 sx={{ paddingBottom: 0 }}
@@ -143,7 +143,7 @@ function HighlightCards(props) {
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </>
+                    
                 );
             })}
         </>
