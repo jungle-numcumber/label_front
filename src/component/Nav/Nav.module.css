@@ -101,31 +101,6 @@
 
 .switch{
     width: 1.8rem;
-    /* height: 1.5rem; */
     margin: 5%;
     cursor: pointer;
 }
-
-/* 여기서부터 NavLogin CSS */
-
-/* .headerLogin{
-    display: flex;
-    height: 70px;
-    align-items: center;
-    justify-content: space-around;
-    border-bottom: 1px solid #E2E5E6;
-}
-
-.buttonLogin{
-    all: unset;
-    color: #fff;
-    width: 70px;
-    height: 35px;
-    text-align: center;
-    background-color: #3C64B1;
-    cursor: pointer;
-}
-
-.buttonLogin:hover{
-    opacity: 90%;
-} */

@@ -125,8 +125,6 @@
     display: flex;
     justify-content: center;
     border-radius: 8px;
-    /* box-shadow: 10px 10px 10px #e5e7e9; */
-    /* padding-inline-start: -40px; */
 }
 
 .squares{

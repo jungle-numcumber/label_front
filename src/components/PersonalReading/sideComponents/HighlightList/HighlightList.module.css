@@ -77,7 +77,6 @@
 
 .highlightCard {
     display: flex;
-    /* align-items: center; */
     margin: 8px 0;
     max-width: 100%;
     max-height: 42px;
@@ -98,14 +97,10 @@
 .highlightedText {
     width: 100%;
 
-    /* margin: 8px 0 8px 8px; */
     font-weight: 400;
     font-size: 14px;
     line-height: 21px;
     color: #2D3748;
-    
-    /* display: flex; */
-    /* align-items: center; */
 }
 
 .clearHighlight {
@@ -134,10 +129,8 @@
 }
 
 .card:hover {
-    /* transform: translateY(-6px); */
     animation-name: hover;
     animation-duration: 0.8s;
-    /* animation-delay: 0.4s; */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;

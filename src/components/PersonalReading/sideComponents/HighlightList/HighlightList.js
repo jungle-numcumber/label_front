@@ -1,8 +1,7 @@
 import styles from "./HighlightList.module.css";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from '../SearchBar/SearchBar.js';
-import HighlightBadge from './HighlightBadge/HighlightBadge.js';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -10,8 +9,6 @@ import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from "@mui/material/IconButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 function HighlightList(props) {
     const [highlightData, setHighlightData] = useState([]);
