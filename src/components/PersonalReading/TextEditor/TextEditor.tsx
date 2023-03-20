@@ -15,7 +15,7 @@ import React from 'react';
 import './TextEditor.css';
 import axios from 'axios';
 
-const url: string = 'https://tradingstudy.shop:443';
+const url: string = 'https://junglenewcumbersocket.shop:443';
 let socket: any;
 let timerId: NodeJS.Timeout;
 
@@ -103,7 +103,7 @@ async function getPresignedUrl(userID: string) {
   try {
     const randomString = Math.random().toString(36).substring(2, 11);
     const fileName = `${userID}_${randomString}.png`;
-    const response = await axios.post('https://tradingstudy.shop:443/users/sign', {
+    const response = await axios.post('https://junglenewcumbersocket.shop:443/users/sign', {
       fileName,
     });
     return { preSignedUrl: response.data, fileName };
